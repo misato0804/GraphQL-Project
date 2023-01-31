@@ -17,12 +17,13 @@ export const typeDefs = gql`
     }
     type Query {
 #        Get All User List
-        users: [User!]!  
+        users: UsersResult
 #        Get Single User
         user(id: ID!): User!
 #        movies schema
         movies: [Movie!]!
         movie(name: String): Movie!
+        userAgeA(age: Int!): User!
     }
     
     input CreateUserInput {
@@ -41,4 +42,14 @@ export const typeDefs = gql`
         updateUsername(input: UpdateUsernameInput) : User
         deleteUser(id: ID!): [User]
     }
+    
+    type UsersSuccessfulResult {
+        users: [User!]!
+    }
+    
+    type UsersErrorResult {
+        message: String!
+    }
+    
+    union UsersResult = UsersSuccessfulResult | UsersErrorResult
 `
